@@ -41,6 +41,17 @@ namespace Hangman2
             }
         }
 
+        // STEP 4 - Requesting a letter from the user
+        // Only valid letters and lower case
+        static char RequestLetterFromUser()
+        {
+            Console.Write("Please enter your guess (letters only): ");
+            string input = Console.ReadLine().ToLower();
+            char letter = Convert.ToChar(input);
+
+            return letter;
+        }
+
         static void Main(string[] args)
         {
             Welcome();
@@ -48,6 +59,10 @@ namespace Hangman2
             BuildInitialRevealedSecret();
 
             Console.WriteLine($"Current user progress: {revealedSecret}");
+
+            char userGuess = RequestLetterFromUser();
+
+            Console.WriteLine("Your guess: " + userGuess);
         }
     }
 }
