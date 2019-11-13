@@ -13,6 +13,9 @@ namespace Hangman2
         // STEP 5 - Previously guessed letters
         static string previouslyGuessedLetters = "";
 
+        // STEP 6 - Number of wrong guesses left
+        static int remainingTries = 5;
+
         // STEP 1 - Show user welcome message
         static void Welcome()
         {
@@ -59,6 +62,28 @@ namespace Hangman2
             return letter;
         }
 
+        // STEP 6 - Processing the user letter
+        static void ProcessUserLetter(char letter)
+        {
+            // Check if already tried
+            if (previouslyGuessedLetters.Contains(letter))
+            {
+                Console.WriteLine("You already tried that letter");
+            }
+            else
+            {
+                previouslyGuessedLetters += $"{letter} ";
+                if (secret.Contains(letter))
+                {
+                    Console.WriteLine("You guessed correct!");
+                }
+                else
+                {
+                    Console.WriteLine("Wrong guess. Getting closer to the gallows");
+                }
+            }
+        }
+
         static void Main(string[] args)
         {
             Welcome();
@@ -71,8 +96,10 @@ namespace Hangman2
 
             Console.WriteLine("Your guess: " + userGuess);
 
-            previouslyGuessedLetters += $"{userGuess} ";
+            
             Console.WriteLine($"You tried the following letters: {previouslyGuessedLetters}");
+
+            ProcessUserLetter(userGuess);
         }
     }
 }
