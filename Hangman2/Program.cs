@@ -45,9 +45,13 @@ namespace Hangman2
         // Only valid letters and lower case
         static char RequestLetterFromUser()
         {
-            Console.Write("Please enter your guess (letters only): ");
-            string input = Console.ReadLine().ToLower();
-            char letter = Convert.ToChar(input);
+            char letter = ' ';
+            do
+            {
+                Console.Write("Please enter your guess (letters only): ");
+                string input = Console.ReadLine().ToLower();
+                letter = Convert.ToChar(input);
+            } while (!(letter >= 'a' && letter <= 'z'));
 
             return letter;
         }
