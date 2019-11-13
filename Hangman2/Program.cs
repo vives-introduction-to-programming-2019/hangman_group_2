@@ -10,6 +10,9 @@ namespace Hangman2
         // STEP 3 - Revealed Secret (= current user progress)
         static string revealedSecret = "";
 
+        // STEP 5 - Previously guessed letters
+        static string previouslyGuessedLetters = "";
+
         // STEP 1 - Show user welcome message
         static void Welcome()
         {
@@ -67,6 +70,9 @@ namespace Hangman2
             char userGuess = RequestLetterFromUser();
 
             Console.WriteLine("Your guess: " + userGuess);
+
+            previouslyGuessedLetters += $"{userGuess} ";
+            Console.WriteLine($"You tried the following letters: {previouslyGuessedLetters}");
         }
     }
 }
