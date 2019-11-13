@@ -76,10 +76,26 @@ namespace Hangman2
                 if (secret.Contains(letter))
                 {
                     Console.WriteLine("You guessed correct!");
+
+                    string newRevealedSecret = "";
+                    for (int i = 0; i < secret.Length; i++)
+                    {
+                        if (secret[i] == letter)
+                        {
+                            newRevealedSecret += $"{letter} ";
+                        }
+                        else
+                        {
+                            newRevealedSecret += $"{revealedSecret[2*i]} ";
+                        }
+                    }
+
+                    revealedSecret = newRevealedSecret;
                 }
                 else
                 {
                     Console.WriteLine("Wrong guess. Getting closer to the gallows");
+                    remainingTries--;
                 }
             }
         }
@@ -92,14 +108,16 @@ namespace Hangman2
 
             Console.WriteLine($"Current user progress: {revealedSecret}");
 
+            Console.WriteLine($"You tried the following letters: {previouslyGuessedLetters}");
             char userGuess = RequestLetterFromUser();
 
             Console.WriteLine("Your guess: " + userGuess);
-
             
-            Console.WriteLine($"You tried the following letters: {previouslyGuessedLetters}");
+            
 
             ProcessUserLetter(userGuess);
+
+            Console.WriteLine($"Current user progress: {revealedSecret}");
         }
     }
 }
