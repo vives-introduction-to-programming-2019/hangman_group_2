@@ -27,13 +27,13 @@ namespace Hangman2
         // STEP 2 - Generate secret word
         static void GenerateSecret()
         {
-            string[] secrets =
-            {
-                "Hello World",
-                "Immutable",
-                "Scope Resolution Operator",
-                "Dude"
-            };
+            string[] secrets = System.IO.File.ReadAllLines(@"words.txt");
+            //{
+            //    "Hello World",
+            //    "Immutable",
+            //    "Scope Resolution Operator",
+            //    "Dude"
+            //};
 
             Random generator = new Random();
             int index = generator.Next(secrets.Length);
