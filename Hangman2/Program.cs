@@ -56,7 +56,7 @@ namespace Hangman2
             {
                 Console.Write("Please enter your guess (letters only): ");
                 string input = Console.ReadLine().ToLower();
-                letter = Convert.ToChar(input);
+                letter = Convert.ToChar(input[0]);
             } while (!(letter >= 'a' && letter <= 'z'));
 
             return letter;
@@ -100,24 +100,39 @@ namespace Hangman2
             }
         }
 
+        static void GameLoop()
+        {
+            do
+            {
+                Console.WriteLine($"Current user progress: {revealedSecret}");
+                Console.WriteLine($"You tried the following letters: {previouslyGuessedLetters}");
+                Console.WriteLine($"You have {remainingTries} wrong guesses left");
+                char userGuess = RequestLetterFromUser();
+
+                Console.WriteLine("Your guess: " + userGuess);
+
+                ProcessUserLetter(userGuess);
+            } while (revealedSecret.Contains("_") && remainingTries > 0);
+        }
+
+        static void DetermineWinLoss()
+        {
+            if (remainingTries > 0)
+            {
+                Console.WriteLine("\nCongratz! You have won this fabulous game!");
+            } else
+            {
+                Console.WriteLine("\nTo the gallows with you.");
+            }
+        }
+
         static void Main(string[] args)
         {
             Welcome();
             GenerateSecret();
             BuildInitialRevealedSecret();
-
-            Console.WriteLine($"Current user progress: {revealedSecret}");
-
-            Console.WriteLine($"You tried the following letters: {previouslyGuessedLetters}");
-            char userGuess = RequestLetterFromUser();
-
-            Console.WriteLine("Your guess: " + userGuess);
-            
-            
-
-            ProcessUserLetter(userGuess);
-
-            Console.WriteLine($"Current user progress: {revealedSecret}");
+            GameLoop();
+            DetermineWinLoss();
         }
     }
 }
