@@ -123,15 +123,18 @@ namespace Hangman2
                 Console.WriteLine("Your guess: " + userGuess);
 
                 ProcessUserLetter(userGuess);
+                Console.Clear();
             } while (revealedSecret.Contains("_") && remainingTries > 0);
         }
 
         static void DetermineWinLoss()
         {
+            Console.WriteLine($"\nThe secret was {secret}");
             if (remainingTries > 0)
             {
                 Console.WriteLine("\nCongratz! You have won this fabulous game!");
-            } else
+            }
+            else
             {
                 Console.WriteLine("\nTo the gallows with you.");
             }
